@@ -36,18 +36,25 @@ public class JsonSorter {
                 }
 
                 list.sort((Comparator) (o1, o2) -> {
-                    String str1 = new String();
-                    String str2 = new String();
+                    String firstJsonStr = "";
+                    String secondJsonStr = "";
                     try {
                         JSONObject x = (JSONObject) o1;
                         JSONObject y = (JSONObject) o2;
 
-                        str1 = (String) x.get(jsonKeyMap.get(prefix + jsonKey));
-                        str2 = (String) y.get(jsonKeyMap.get(prefix + jsonKey));
+                        String jsonKeyToken = jsonKeyMap.get(prefix + jsonKey);
+                        List<String> jsonKeyList = Arrays.asList(jsonKeyToken.split(",", 5));
+
+                        for(String keyJson : jsonKeyList) {
+                            if (x.keySet().contains(keyJson))
+                                firstJsonStr += x.get(keyJson).toString();
+                            if (y.keySet().contains(keyJson))
+                            secondJsonStr += y.get(keyJson).toString();
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    return str1.compareTo(str2);
+                    return firstJsonStr.compareTo(secondJsonStr);
                 });
 
                 for(int i = 0; i < jsonArray.length(); i++) {
