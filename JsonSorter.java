@@ -66,7 +66,8 @@ public class JsonSorter {
 
                 jsonObject = jsonObject.put(jsonKey, sortedJsonArray);
             } else if(jsonObject.opt(jsonKey) instanceof JSONObject) {
-                jsonObject = jsonSorterRecursive(jsonObject.optJSONObject(jsonKey), prefix + jsonKey + ".");
+                JSONObject jsonObjectTemp = jsonSorterRecursive(jsonObject.optJSONObject(jsonKey), prefix + jsonKey + ".");
+                jsonObject = jsonObject.put(jsonKey, jsonObjectTemp);
             }
         }
 
