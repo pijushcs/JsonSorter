@@ -5,15 +5,15 @@ import java.lang.*;
 
 public class ExampleUsage {
     public static void main(String[] args) {
-        String jsonStr = "{\"name\": [ " +
+        String jsonStr = "{\"tst\":[{\"tname\": [ " +
                 "{ \"id\": \"3\", \"name\": \"PQR\", \"add\": [{\"uid\": \"xyz\"},{\"uid\": \"abc\"}] }," +
                 "{ \"id\": \"1\", \"name\": \"PQR\", \"add\": [{\"uid\": \"pqr\"},{\"uid\": \"pqr\", \"id\": \"1\"}] }," +
-                "{ \"id\": \"2\", \"name\": \"ABC\" }]}";
+                "{ \"id\": \"2\", \"name\": \"ABC\" }]}]}";
 
         // Key to Unique id Map
         Map<String, String> mapKeyUniqueId = new TreeMap<String, String>();
-        mapKeyUniqueId.put("name", "name,id");
-        mapKeyUniqueId.put("name.add", "uid,id");
+        mapKeyUniqueId.put("tst.tname", "name,id");
+        mapKeyUniqueId.put("tst.tname.add", "uid,id");
 
         // Create JsonSorter
         JsonSorter jsonSorter = new JsonSorter(jsonStr, mapKeyUniqueId);
